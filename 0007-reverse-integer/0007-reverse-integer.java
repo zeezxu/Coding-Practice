@@ -1,31 +1,25 @@
 class Solution {
-    public void reverse(char[] s, int i, int j){
-        while (i<j){
-            char temp = s[i];
-            s[i] = s[j];
-            s[j] = temp;
-
-            i++;
-            j--;
-        }
-    }
+   
     public int reverse(int x) {
-        String s = "" + x;
-        
-        char[] arr = s.toCharArray();
 
-        int i = 0; int j = arr.length-1;
+        int res = 0;
 
-        if (arr[0] == '-'){
-            i = 1;
-        };
+        while(x != 0 ){
+            int pop = x % 10;
 
-        reverse(arr, i, j);
-        long y = Long.parseLong(new String(arr));
+            x = x/10;
 
-        if (y > Integer.MAX_VALUE || y < Integer.MIN_VALUE){
-            return 0;
-        } 
-        return (int)y;
-    }    
+            if(res > Integer.MAX_VALUE / 10 || res == Integer.MAX_VALUE/10 && pop > 7){
+                return 0;
+            }
+            if(res < Integer.MIN_VALUE / 10 || res == Integer.MIN_VALUE/10 && pop < -8){
+                return 0;
+            }
+
+            res = res * 10 + pop;
+        }
+
+        return res;
+
+    }
 }
